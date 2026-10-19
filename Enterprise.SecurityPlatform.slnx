@@ -1,0 +1,31 @@
+<Solution>
+  <Folder Name="/artifacts/" />
+  <Folder Name="/docs/" />
+  <Folder Name="/docs/architecture/">
+    <File Path="../../Users/ontha/Downloads/Solution_Architecture.md" />
+  </Folder>
+  <Folder Name="/docs/requirements/">
+    <File Path="../../Users/ontha/Downloads/Requirements_and_Objectives.md" />
+  </Folder>
+  <Folder Name="/packaging/" />
+  <Folder Name="/packaging/Enterprise.Security/">
+    <File Path="packaging/Enterprise.Security/Enterprise.Security.nuspec" />
+    <File Path="packaging/Enterprise.Security/Enterprise.Security.Packaging.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Enterprise.Security.AspNetCore/Enterprise.Security.AspNetCore.csproj" Id="1fa0e1e8-3459-49ed-b2f4-f1f06927bf00" />
+    <Project Path="src/Enterprise.Security.Authentication/Enterprise.Security.Authentication.csproj" Id="bc7e08ad-8418-4664-bf33-4298d4bf00b0" />
+    <Project Path="src/Enterprise.Security.Authorization/Enterprise.Security.Authorization.csproj" Id="1b272d6c-b5fa-4163-8832-cc82c4c2e958" />
+    <Project Path="src/Enterprise.Security.Core/Enterprise.Security.Core.csproj" Id="0d9469c9-3983-471a-9a1b-7c0fba58af03" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Enterprise.Security.AspNetCore.Tests/Enterprise.Security.AspNetCore.Tests.csproj" Id="898f4588-47cc-40e2-ad16-cd0596342478" />
+    <Project Path="tests/Enterprise.Security.Authentication.Tests/Enterprise.Security.Authentication.Tests.csproj" Id="88432749-2336-4d01-b387-705e6f0ec1a4" />
+    <Project Path="tests/Enterprise.Security.Authorization.Tests/Enterprise.Security.Authorization.Tests.csproj" Id="7a7e34e9-76e5-4594-a79e-76f246a2cc24" />
+    <Project Path="tests/Enterprise.Security.Core.Tests/Enterprise.Security.Core.Tests.csproj" Id="c35a761f-d701-47eb-92d8-54ae46ae2aea" />
+  </Folder>
+</Solution>
