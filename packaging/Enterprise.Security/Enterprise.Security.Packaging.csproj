@@ -42,4 +42,8 @@
 			  PackagePath="lib/net10.0/" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+	</ItemGroup>
+
 </Project>
