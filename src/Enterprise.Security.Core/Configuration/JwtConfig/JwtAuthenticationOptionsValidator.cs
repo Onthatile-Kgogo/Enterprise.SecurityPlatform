@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Enterprise.Security.Core.Claims;
 
 namespace Enterprise.Security.Core.Configuration.JwtConfig
 {
@@ -22,6 +20,38 @@ namespace Enterprise.Security.Core.Configuration.JwtConfig
 
             foreach (var (providerName, provider) in options.Providers)
             {
+                if (string.Equals(provider.PermissionClaimType, SecurityClaimTypes.Permission, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new InvalidOperationException($"JWT provider '{providerName}' uses a reserved PermissionClaimType.");
+                }
+
+                if (string.IsNullOrWhiteSpace(provider.ScopeClaimType))
+                {
+                    throw new InvalidOperationException($"JWT provider '{providerName}' requires a ScopeClaimType.");
+                }
+
+                if (string.Equals(provider.ScopeClaimType, SecurityClaimTypes.Permission, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new InvalidOperationException($"JWT provider '{providerName}' uses a reserved ScopeClaimType.");
+                }
+
+                if (provider.ScopeToPermissions is null)
+                {
+                    throw new InvalidOperationException($"JWT provider '{providerName}' scope mappings cannot be null.");
+                }
+
+                foreach (var (scope, permissions) in provider.ScopeToPermissions)
+                {
+                    if (string.IsNullOrWhiteSpace(scope) || scope.Any(char.IsWhiteSpace))
+                    {
+                        throw new InvalidOperationException($"JWT provider '{providerName}' contains an invalid scope mapping key.");
+                    }
+
+                    if (permissions is null || permissions.Count == 0 || permissions.Any(string.IsNullOrWhiteSpace))
+                    {
+                        throw new InvalidOperationException($"JWT provider '{providerName}' scope '{scope}' requires non-empty permissions.");
+                    }
+                }
                 if (string.IsNullOrWhiteSpace(providerName))
                 {
                     throw new InvalidOperationException("JWT provider names cannot be empty.");

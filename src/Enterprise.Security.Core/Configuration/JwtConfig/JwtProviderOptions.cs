@@ -8,5 +8,7 @@
         public bool RequireHttpsMetadata { get; set; } = true;
         public string RoleClaimType { get; set; } = "role";
         public string PermissionClaimType { get; set; } = "permission";
+        public string ScopeClaimType { get; set; } = "scope";
+        public Dictionary<string, List<string>> ScopeToPermissions { get; set; } = new(StringComparer.Ordinal);
     }
 }

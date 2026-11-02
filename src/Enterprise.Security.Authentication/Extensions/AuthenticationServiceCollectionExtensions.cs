@@ -1,6 +1,9 @@
-﻿using Enterprise.Security.Authentication.Handlers;
+﻿using Enterprise.Security.Authentication.Claims;
+using Enterprise.Security.Authentication.Handlers;
+using Enterprise.Security.Core.Claims;
 using Enterprise.Security.Core.Configuration.JwtConfig;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
@@ -41,8 +44,14 @@ public static class AuthenticationServiceCollectionExtensions
                 multiProvider.ProviderSchemes = providerSchemes;
             });
 
+
         foreach (var provider in options.Providers.Values)
         {
+            if (string.Equals(provider.PermissionClaimType, SecurityClaimTypes.Permission, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException($"JWT provider '{provider.Scheme}' uses a reserved permission claim type.");
+            }
+
             builder.AddJwtBearer(provider.Scheme, jwt =>
             {
                 jwt.Authority = provider.Authority;
@@ -71,6 +80,26 @@ public static class AuthenticationServiceCollectionExtensions
                     ValidAudience = provider.Audience,
                     RoleClaimType = provider.RoleClaimType,
                     ClockSkew = TimeSpan.FromSeconds(30)
+                };
+
+                jwt.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
+                    {
+                        if (context.Principal is null)
+                        {
+                            context.Fail("The validated token has no principal.");
+                            return Task.CompletedTask;
+                        }
+
+                        PermissionClaimsNormalizer.Normalize(
+                            context.Principal,
+                            provider.PermissionClaimType,
+                            provider.ScopeClaimType,
+                            provider.ScopeToPermissions);
+
+                        return Task.CompletedTask;
+                    }
                 };
             });
         }
