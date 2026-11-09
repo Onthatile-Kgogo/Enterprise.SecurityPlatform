@@ -98,4 +98,6 @@ See the [solution architecture](https://github.com/Onthatile-Kgogo/Enterprise.Se
 
 ## License
 
+Copyright (c) 2026 Onthatile Kgogo
+
 [MIT](https://github.com/Onthatile-Kgogo/Enterprise.SecurityPlatform/blob/main/LICENSE)
