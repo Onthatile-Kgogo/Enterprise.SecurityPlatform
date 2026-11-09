@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<Authors>Onthatile Kgogo</Authors>
 		<TargetFramework>net10.0</TargetFramework>
 		<PackageId>Enterprise.Security</PackageId>
 		<Version>1.0.0</Version>
@@ -10,6 +11,11 @@
 		<Description>
 			Reusable authentication and authorization components for .NET applications.
 		</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/Onthatile-Kgogo/Enterprise.SecurityPlatform</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Onthatile-Kgogo/Enterprise.SecurityPlatform.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -48,6 +54,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+		<None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>
